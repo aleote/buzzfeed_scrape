@@ -48,15 +48,15 @@ mongoose.connect(process.env.MONGOD_URI);
 }
 
 
-var db = mongoose.connection;
+var mongoose = mongoose.connection;
 
 // Show any mongoose errors
-db.on("error", function(error) {
+mongoose.on("error", function(error) {
   console.log("Mongoose Error: ", error);
 });
 
 // Once logged in to the db through mongoose, log a success message
-db.once("open", function() {
+mongoose.once("open", function() {
   console.log("Mongoose connection successful.");
 });
 
