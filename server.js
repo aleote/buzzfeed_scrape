@@ -40,6 +40,8 @@ app.use("/", routes);
 var databaseUri= "mongodb://localhost/Buzzfeed";
 
 mongoose.Promise = Promise;
+
+
 if (process.env.MONGODB_URI) {
 mongoose.connect(process.env.MONGOD_URI);
 } else {
@@ -47,16 +49,16 @@ mongoose.connect(process.env.MONGOD_URI);
 	useMongoClient:true
 }
 
+var db = mongoose.connection;
 
-var mongoose = mongoose.connection;
 
 // Show any mongoose errors
-mongoose.on("error", function(error) {
+db.on("error", function(error) {
   console.log("Mongoose Error: ", error);
 });
 
 // Once logged in to the db through mongoose, log a success message
-mongoose.once("open", function() {
+db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
 
