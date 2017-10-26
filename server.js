@@ -37,10 +37,16 @@ var routes = require("./controllers/scraper_controller.js");
 
 app.use("/", routes);
 
+var databaseUri= "mongodb://localhost/Buzzfeed";
+
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/Buzzfeed", {
+if (process.env.MONGODB_URI) {
+mongoose.connect(process.env.MONGOD_URI);
+} else {
+	mongoose.connect(databaseUri);
 	useMongoClient:true
-});
+}
+
 
 var db = mongoose.connection;
 
